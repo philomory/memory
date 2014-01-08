@@ -25,6 +25,7 @@ class GridLayer < Joybox::Core::Layer
       touch = touches.any_object
 
       if tile = tile_to_flip(touch.location)
+        break if @active_tiles.include?(tile)
         tile.flip
 
         @active_tiles << tile if @active_tiles.size < 2

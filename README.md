@@ -754,6 +754,15 @@ The only real trick here is that `Callback.with` expects a block, so we need `ha
       @active_tiles = []
     end
 
+Another issue with you may have noticed is that strange things happen if you tap the same tile twice, rather than two different tiles. Let's nip that in the bud:
+
+    # grid_layer.rb
+    if tile = tile_to_flip(touch.location)
+      break if @active_tiles.include?(tile)
+      tile.flip
+      # …
+    end
+
 Take a deep breath, run `rake` again, and play your game. If everything went well, matched tiles should stay matched, unmatched tiles should get flipped back over, and you should be limited to two selections at a time -- just like you would expect!
 
 ## #Winning
