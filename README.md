@@ -503,11 +503,17 @@ In our case, we'll end up with something like:
 
 (Notice that I grouped them in fours. These correspond directly to the tiles in our game!)
 
+Finally, we don't want the tiles to arranged in order, that would be boring (and make the game very easy)! So, let's things up with Array#shuffle!:
+
+    types = Tile::TYPES.sample(8) * 2
+    type.shuffle!
+
 Let's make sure we pass a type to each Tile as we construct it. We can use `Array#shift` to make it easy on ourselves:
 
     # grid_layer.rb
     def load_tiles
       types = Tile::TYPES.sample(8) * 2
+      types.shuffle!
 
       @tiles = 4.times.map do |row|
         4.times.map do |column|
