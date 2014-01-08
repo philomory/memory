@@ -480,13 +480,13 @@ Next, let's update our GridLayer to pick 8 pairs of tiles that can be matched (4
 
 First, let's pick 8 random tile types:
 
-    8.times.map { Tile::TYPES.sample }
+    Tile::TYPES.sample(8)
 
-In Ruby 1.9+, `Array#sample` returns a random element from the array. We want to do it 8 times and collect them into a new array, so we use `times.map`.
+In Ruby 1.9+, `Array#sample` returns a random element from the array. Called with an integer argument, it returns an array containing that many randomly selected elements, without repeats. 
 
 Once we've done that, we want to create pairs of tiles:
 
-    types = 8.times.map { Tile::TYPES.sample } * 2
+    types = Tile::TYPES.sample(8) * 2
 
 In Ruby, if you multiply an Array by a number `n`, it creates a new array with each element appearing `n` times. So:
 
@@ -495,7 +495,7 @@ In Ruby, if you multiply an Array by a number `n`, it creates a new array with e
 
 In our case, we'll end up with something like:
 
-    > types = 8.times.map { Tile::TYPES.sample } * 2
+    > Tile::TYPES.sample(8) * 2
     => ["star", "girl_pink", "star", "gem_blue",
         "star", "boy", "key", "girl_cat",
         "star", "girl_pink", "star", "gem_blue",
@@ -507,7 +507,7 @@ Let's make sure we pass a type to each Tile as we construct it. We can use `Arra
 
     # grid_layer.rb
     def load_tiles
-      types = 8.times.map { Tile::TYPES.sample } * 2
+      types = Tile::TYPES.sample(8) * 2
 
       @tiles = 4.times.map do |row|
         4.times.map do |column|

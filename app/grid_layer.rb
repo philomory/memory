@@ -54,7 +54,7 @@ class GridLayer < Joybox::Core::Layer
   end
 
   def load_tiles
-    types = 8.times.map { Tile::TYPES.sample } * 2
+    types = Tile::TYPES.sample(8) * 2
 
     @tiles = 4.times.map do |row|
       4.times.map do |column|
